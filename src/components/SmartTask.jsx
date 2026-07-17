@@ -11,9 +11,12 @@ const SmartTask = () => {
 
     const addTask = (e) => {
         e.preventDefault();
+
+        // Error Handling
         if (!taskInput.trim() || taskPrice === '') {
             return;
         }
+        // Checking Duplicate Item
         const isduplicate = taskList.some((item) =>
             item.name.toLowerCase() === taskInput.trim().toLowerCase() && item.id !== editingId
         );
@@ -31,6 +34,7 @@ const SmartTask = () => {
             setEditingId(null);
             toast.success("📝 Task Update Successfully!!");
         } else {
+            // Adding task Logic
             const newTask = {
                 id: Date.now(),
                 name: taskInput,
@@ -43,8 +47,11 @@ const SmartTask = () => {
         setTaskPrice("")
 
     }
+
+    // Total Spends
     const totalSpent = taskList.reduce((sum, item) => sum + item.price, 0);
     
+    // Delete Items
     const deleteItems = (index) => {
         const deletedItem = taskList.filter((item) => item.id !== index);
         setTaskList(deletedItem);
@@ -55,12 +62,16 @@ const SmartTask = () => {
             setEditingId(null);
         }
     }
+
+    // Edit Task Logic
     const editTask = (item) => {
         setTaskInput(item.name);
         setTaskPrice(item.price);
         setEditingId(item.id)
 
     }
+
+    // Filttering Logic
     const filterItems = taskList.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
