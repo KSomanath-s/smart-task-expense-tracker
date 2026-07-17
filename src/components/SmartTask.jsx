@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SmartTask = () => {
     const [taskInput, setTaskInput] = useState("");
     const [taskPrice, setTaskPrice] = useState("");
-    const [taskList, setTaskList] = useState([]);
+    const [taskList, setTaskList] = useState(() => {
+        const savedTask = localStorage.getItem("tasklist");
+        return savedTask ? JSON.parse(savedTask) : [];
+    });
     const [editingId, setEditingId] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -50,7 +53,7 @@ const SmartTask = () => {
 
     // Total Spends
     const totalSpent = taskList.reduce((sum, item) => sum + item.price, 0);
-    
+
     // Delete Items
     const deleteItems = (index) => {
         const deletedItem = taskList.filter((item) => item.id !== index);
@@ -73,6 +76,10 @@ const SmartTask = () => {
 
     // Filttering Logic
     const filterItems = taskList.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    useEffect(() => {
+        localStorage.setItem("tasklist", JSON.stringify(taskList))
+    }, [taskList])
 
     return (
         <>
