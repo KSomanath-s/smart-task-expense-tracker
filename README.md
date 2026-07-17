@@ -38,5 +38,5 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
 1. **Clone the Repository**
    ```bash
-   git clone [https://github.com/your-username/smart-task-expense-tracker.git](https://github.com/your-username/smart-task-expense-tracker.git)
+   git clone [https://github.com/KSomanath-s/smart-task-expense-tracker](https://smart-task-expense-tracker.netlify.app/)
    cd smart-task-expense-tracker
